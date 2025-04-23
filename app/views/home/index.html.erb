@@ -1,4 +1,6 @@
 <h3>STOCK TRADING PAGE</h3>
-<p>Symbol: <%=  @symbol %></p>
-<br>
-<p>Stock Price: <%=  @stock_price %></p>
+<% if @symbol %>
+  <p>Symbol: <%=  @symbol %></p>
+  <br>
+  <p>Stock Price: <%=  @stock_price %></p>
+<% end %>
