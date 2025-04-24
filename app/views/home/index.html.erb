@@ -4,3 +4,9 @@
   <br>
   <p>Stock Price: <%=  @stock_price %></p>
 <% end %>
+<%= form_with url: "/search", method: :get do |form| %>
+  <%= form.label :query, "Search stock:" %>
+  <%= form.search_field :query %>
+  <%= form.submit "Search" %>
+<% end %>
+<h3>Your stockesesess</h3>

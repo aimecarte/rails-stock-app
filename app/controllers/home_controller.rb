@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       @stock_price = response.dig("Time Series (5min)").values.first.dig("1. open")
     end
   end
+
+  def search
+    @q = params[:query]
+  end
 end
