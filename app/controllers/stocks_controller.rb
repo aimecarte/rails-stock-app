@@ -1,4 +1,5 @@
 class StocksController < ApplicationController
+  before_action :authenticate_user!
   def index
     if params[:symbol]
       response = AvaApi.fetch_records(params[:symbol])
