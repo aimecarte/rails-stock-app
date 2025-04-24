@@ -1,0 +1,26 @@
+<h3>Search Results</h3>
+<ul>
+  <li>
+    <div>Amazon: AMZN</div>
+    <div>Price: $300.00</div>
+    <div>
+      <input type="number" name="" id="" placeholder="quantity">
+      <button>Buy</button>
+    </div>
+  </li>
+  <li>
+    <div>Google: GOOG</div>
+    <div>Price: $300.00</div>
+    <div>
+      <input type="number" name="" id="" placeholder="quantity">
+      <button>Buy</button>
+    </div>
+  </li>
+  <% @results.each do |res| %>
+    <li>
+      <span><%= res[:symbol] %></span>
+      <span><%= res[:name] %></span>
+      <button>Buy</button>
+    </li>
+  <% end %>  
+</ul>
