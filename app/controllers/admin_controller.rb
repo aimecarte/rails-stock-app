@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   before_action :authenticate_user!
 
+
   def index
   end
 
@@ -15,9 +16,6 @@ class AdminController < ApplicationController
       else
         render :new, status: :unprocessable_entity
   end
-
-
-
 
   private user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

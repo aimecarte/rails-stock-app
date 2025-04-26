@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   root "stocks#index"
   get "/search", to: "stocks#search"
 
-
+  namespace :admin do
+    resources :index, only: [:index]
+  end
 
   resources :admin
   
