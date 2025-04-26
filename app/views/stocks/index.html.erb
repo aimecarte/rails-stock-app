@@ -10,18 +10,13 @@
 <% end %>
 <h3>Your stocks</h3>
 <ul>
-  <li>
-    <div>MSFT</div>
-    <div>Quantity: 1</div>
-    <div>
-      <button>Show</button>
-    </div>
-  </li>
-  <li>
-    <div>NFLX</div>
-    <div>Quantity: 2</div>
-    <div>
-      <button>Show</button>
-    </div>
-  </li>
+  <% @stocks.each do |stock| %>
+    <li>
+      <div><%= stock.code %></div>
+      <div><%= stock.quantity %></div>
+      <div>
+        <button>Show</button>
+      </div>
+    </li>
+  <% end %>
 </ul>
