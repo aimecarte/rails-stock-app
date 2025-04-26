@@ -1,15 +1,19 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!
   def index
-    # if params[:symbol]
-    # file_path = Rails.root.join("lib", "assets", "data.json")
-    # data = JSON.parse(File.read(file_path))
-    # response = AvaApi.fetch_records(params[:symbol])
-    # @symbol = data["Global Quote"]["01. symbol"]
-    # @stock_price = data["Global Quote"]["05. price"]
-
     @stocks = current_user.stocks
-    # end
+  end
+
+  def show
+    # mock data for stock
+    file_path = Rails.root.join("lib", "assets", "data.json")
+    data = JSON.parse(File.read(file_path))
+
+    # real data fetch for stock
+    # data = AvaApi.fetch_records(@stock.code)
+
+    @stock = current_user.stocks.find(params[:id])
+    @price = data["Global Quote"]["05. price"]
   end
 
   def search
@@ -21,7 +25,6 @@ class StocksController < ApplicationController
 
   def create
     @stock = current_user.stocks.new(stock_params)
-    binding.b
     @stock.save
     redirect_to root_path
   end

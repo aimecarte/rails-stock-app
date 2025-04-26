@@ -15,7 +15,7 @@
       <div><%= stock.code %></div>
       <div><%= stock.quantity %></div>
       <div>
-        <button>Show</button>
+        <%= link_to "Show", stock_path(stock) %>
       </div>
     </li>
   <% end %>
