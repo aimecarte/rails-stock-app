@@ -17,9 +17,13 @@ class StocksController < ApplicationController
   end
 
   def search
-    # response = AvaApi.search(params[:query])
+    # mock data fetch for stocks
     file_path = Rails.root.join("lib", "assets", "stocks.json")
     response = JSON.parse(File.read(file_path))
+
+    # api search for query keyword
+    # response = AvaApi.search(params[:query])
+
     @results = response["bestMatches"].map { |e| { symbol: e["1. symbol"], name: e["2. name"] } }
   end
 
