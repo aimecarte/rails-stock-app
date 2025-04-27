@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   get "home/index"
   get "admin/index"
+  get 'admin', to: 'admin#index'
+  get "admin/show"
+  get "admin/users/show"
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -19,8 +22,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :index, only: [:index]
+    resources :users, only: [:new, :create, :show, :edit, :update]
   end
 
-  resources :admin
+  resources :admin do
+    resources :transactions
+  end
+
   
 end

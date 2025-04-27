@@ -1,0 +1,46 @@
+<h1>Edit User Details</h1>
+
+<%= form_for @user, url: admin_user_path(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+   <div class="field">
+    <%= f.label :isAdmin %>
+    <%= f.check_box :isAdmin %>
+  </div>
+
+    <div class="field">
+    <%= f.label :isApproved %>
+    <%= f.check_box :isApproved%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update User" %>
+  </div>
+<% end %>
+
+
+<%= link_to "Home Page", root_path %> <br> <br>
