@@ -16,7 +16,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "stocks#index"
   get "/search", to: "stocks#search"
-  resources :stocks, only: [ :create, :show ]
+  # resources :stocks, only: [ :create, :show ]
+
+  resources :transactions, only: [ :index ]
+
+  resources :stocks do
+    post :buy, on: :member   # POST /stocks/:id/buy
+    post :sell, on: :member  # POST /stocks/:id/sell
+  end
 
   namespace :admin do
     resources :index, only: [ :index ]
