@@ -36,7 +36,7 @@ class StocksController < ApplicationController
     @price = data["Global Quote"]["05. price"]
 
     # real data fetch for stock
-    # data = AvaApi.fetch_records(@stock.code)
+    # data = AvaApi.get_price(@stock.code)
 
     current_user.transactions.create!(
       transaction_type: "Buy",

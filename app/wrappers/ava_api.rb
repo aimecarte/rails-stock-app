@@ -29,4 +29,9 @@ class AvaApi
     response = http.request(request)
     JSON.parse(response.body)
   end
+
+  def self.get_price(symbol)
+    data = self.fetch_records(symbol)
+    data["Global Quote"]["05. price"]
+  end
 end
