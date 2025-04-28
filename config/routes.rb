@@ -2,10 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   get "home/index"
   get "admin/index"
+<<<<<<< HEAD
   get 'admin', to: 'admin#index'
   get "admin/show"
   get "admin/users/show"
   
+=======
+
+>>>>>>> 6d5b918f2e17eead83c0ced29a74429c13908197
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,8 +23,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "stocks#index"
   get "/search", to: "stocks#search"
+  # resources :stocks, only: [ :create, :show ]
+
+  resources :transactions, only: [ :index ]
+
+  resources :stocks do
+    post :buy, on: :member   # POST /stocks/:id/buy
+    post :sell, on: :member  # POST /stocks/:id/sell
+  end
 
   namespace :admin do
+<<<<<<< HEAD
     resources :index, only: [:index]
     resources :users, only: [:new, :create, :show, :edit, :update]
   end
@@ -30,4 +43,10 @@ Rails.application.routes.draw do
   end
 
   
+=======
+    resources :index, only: [ :index ]
+  end
+
+  resources :admin
+>>>>>>> 6d5b918f2e17eead83c0ced29a74429c13908197
 end

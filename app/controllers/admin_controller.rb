@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 
   def index
     @user = User.all.order(id: :asc)
-    @trader = User.where(isAdmin: false) #display trader user 
+    @trader = User.where(isAdmin: false).order(id: :asc) #display trader user 
 
   end
 

@@ -1,8 +1,6 @@
 <h1>Admin#index</h1>
 <p>Find me in app/views/admin/index.html.erb</p>
 
-
-
 <button id="toggleButton">Show Trader User</button> <br>
 
 <div id="userTable">
@@ -21,9 +19,8 @@
     </tr>
   </thead>
 
-      <% @user.each_with_index do |user, index| %>
+    <% @user.each_with_index do |user, index| %>
 
-  
     </tr>
     <tr>
       <th scope="row"> <%= user.id %> </th>
@@ -59,7 +56,6 @@
 
   <% @trader.each_with_index do |user, index| %>
       
-  
     </tr>
     <tr>
       <th scope="row"> <%= user.id %> </th>

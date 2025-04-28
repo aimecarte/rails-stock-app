@@ -1,26 +1,21 @@
 <h3>Search Results</h3>
 <ul>
-  <li>
-    <div>Amazon: AMZN</div>
-    <div>Price: $300.00</div>
-    <div>
-      <input type="number" name="" id="" placeholder="quantity">
-      <button>Buy</button>
-    </div>
-  </li>
-  <li>
-    <div>Google: GOOG</div>
-    <div>Price: $300.00</div>
-    <div>
-      <input type="number" name="" id="" placeholder="quantity">
-      <button>Buy</button>
-    </div>
-  </li>
   <% @results.each do |res| %>
     <li>
-      <span><%= res[:symbol] %></span>
-      <span><%= res[:name] %></span>
-      <button>Buy</button>
+      <div>
+        <h3>Name: <%= res[:name] %></h3>
+        <h4>Code: <%= res[:symbol] %></h4>
+      </div>
+      <%= form_with url: stocks_path, method: :post do |f| %>
+        <div>
+          <%= hidden_field_tag :name, res[:name]  %>
+          <%= hidden_field_tag :code, res[:symbol]  %>
+        </div>
+        <div>
+          <%= number_field_tag :quantity, nil , placeholder: "Quantity" %>
+          <%= f.submit "Buy" %>
+        </div>
+      <% end %>
     </li>
   <% end %>  
 </ul>
