@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_24_133553) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_27_110027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,7 +25,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_133553) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "type"
+    t.string "transaction_type"
     t.string "code"
     t.integer "quantity"
     t.bigint "user_id", null: false

@@ -1,0 +1,14 @@
+<h1>Name: <%= @stock.name %></h1>
+<h1>Code: <%= @stock.code %></h1>
+<h1>Quantity: <%= @stock.quantity %></h1>
+<h1>Price: <%= @price %></h1>
+<div>
+  <%= form_with url: buy_stock_path(@stock) do |f| %>
+    <%= number_field_tag :quantity, nil, placeholder: "Quantity" %>
+    <%= f.submit "Buy" %>
+  <% end %>
+  <%= form_with url: sell_stock_path(@stock) do |f| %>
+    <%= number_field_tag :quantity, nil, placeholder: "Quantity" %>
+    <%= f.submit "Sell" %>
+  <% end %>
+</div>

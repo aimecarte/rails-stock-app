@@ -1,4 +1,4 @@
-<h1>Dashboard</h1>
+<h1>Portfolio</h1>
 <% if @symbol %>
   <p>Symbol: <%=  @symbol %></p>
   <p>Stock Price: <%=  @stock_price %></p>
@@ -9,6 +9,20 @@
   <%= form.submit "Search" %>
 <% end %>
 <h3>Your stocks</h3>
+<ul>
+  <% @stocks.each do |stock| %>
+    <li>
+      <div><%= stock.code %></div>
+      <div><%= stock.quantity %></div>
+      <div>
+        <%= link_to "Show", stock_path(stock) %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "View Your Transactions", transactions_path  %>
+
 <ul>
   <li>
     <div>MSFT</div>

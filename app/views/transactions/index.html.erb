@@ -1,0 +1,13 @@
+<h1>Your Transactions</h1>
+<ul>
+  <% @transactions.each do |tx| %>
+    <li>
+      <div><%= tx.transaction_type %></div>
+      <div><%= tx.code %></div>
+      <div><%= tx.quantity %></div>
+      <div><%= tx.current_price %></div>
+      <div><%= tx.total %></div>
+      <div><%= tx.created_at %></div>
+    </li>
+  <% end %>
+</ul>
