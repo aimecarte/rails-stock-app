@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   get "home/index"
   get "admin/index"
-
+  get 'admin', to: 'admin#index'
+  get "admin/show"
+  get "admin/users/show"
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -26,8 +29,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :index, only: [ :index ]
+    resources :index, only: [:index]
+    resources :users, only: [:new, :create, :show, :edit, :update]
   end
 
-  resources :admin
+  resources :admin do
+    resources :transactions
+  end
+
+  
 end
