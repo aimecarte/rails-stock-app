@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  after_create :send_welcome_email
+
   validates :first_name, :last_name, presence: true     
   validates :email, presence: true, uniqueness: true 
 
@@ -12,5 +14,17 @@ class User < ApplicationRecord
 
   attribute :isAdmin, :boolean, default: false
   attribute :isApproved, :boolean, default: false
+
+
+  private
+
+  def send_welcome_email
+    UserMailer.registration_success(self).deliver_now
+  end
+
+  def send_approve_account
+    UserMailer.account_approve(self).deliver_now
+  end
+  
   
 end
