@@ -12,10 +12,16 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      if @user.isApproved?
+        UserMailer.account_approve(@user).deliver_now
       redirect_to admin_index_path, notice: "User details updated successfully."
     else
       render :edit, alert: "Error Updating user details."
     end
+  end
+
+
+    
   end
 
   def create

@@ -1,4 +1,4 @@
-<h1>Portfolio</h1>
+<h1>Portfolio <%= @current_user.email %> </h1>
 <% if @symbol %>
   <p>Symbol: <%=  @symbol %></p>
   <p>Stock Price: <%=  @stock_price %></p>

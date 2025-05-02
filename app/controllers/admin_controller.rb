@@ -18,6 +18,7 @@ class AdminController < ApplicationController
     @user = User.new
     @transaction = Transaction.all
   end
+  
 
   def create
     @user = User.new(user_params)
