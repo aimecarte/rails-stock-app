@@ -4,7 +4,7 @@
 <h1>Price: <%= @price %></h1>
 <div>
 
-<% if current_user.isApproved?%>
+<% if current_user.isApproved? || current_user.isAdmin? %>
 
 
   <%= form_with url: buy_stock_path(@stock) do |f| %>
