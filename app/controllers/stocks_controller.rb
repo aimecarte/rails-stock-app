@@ -6,13 +6,14 @@ class StocksController < ApplicationController
 
   def show
     # mock data for stock
-    file_path = Rails.root.join("lib", "assets", "data.json")
-    data = JSON.parse(File.read(file_path))
-
-    # real data fetch for stock
-    # data = AvaApi.fetch_records(@stock.code)
+    # file_path = Rails.root.join("lib", "assets", "data.json")
+    # data = JSON.parse(File.read(file_path))
 
     @stock = current_user.stocks.find(params[:id])
+
+    # real data fetch for stock
+    data = AvaApi.fetch_records(@stock.code)
+
     @price = data["Global Quote"]["05. price"]
   end
 
@@ -25,6 +26,27 @@ class StocksController < ApplicationController
     # response = AvaApi.search(params[:query])
 
     @results = response["bestMatches"].map { |e| { symbol: e["1. symbol"], name: e["2. name"] } }
+
+    @user_stocks = []
+    @stocks = []
+
+    user_stock_symbols = current_user.stocks.pluck(:code)
+
+    @results.each do |stock|
+      if user_stock_symbols.include?(stock[:symbol])
+        existing_stock = current_user.stocks.find_by(code: stock[:symbol])
+        @user_stocks << existing_stock if existing_stock
+      else
+        @stocks << stock
+      end
+    end
+  end
+
+  def new
+    @stock = current_user.stocks.new(
+      name: params[:name],
+      code: params[:code]
+    )
   end
 
   def create
@@ -36,14 +58,15 @@ class StocksController < ApplicationController
     @price = data["Global Quote"]["05. price"]
 
     # real data fetch for stock
-    # data = AvaApi.get_price(@stock.code)
+    # @price = AvaApi.get_price(@stock.code)
+    quantity = params[:stock][:quantity].to_i
 
     current_user.transactions.create!(
       transaction_type: "Buy",
       code: @stock.code,
-      quantity: params[:quantity],
+      quantity: quantity,
       current_price: @price,
-      total: params[:quantity].to_i * @price.to_i
+      total: quantity.to_i * @price.to_f
     )
     redirect_to root_path
   end
@@ -53,27 +76,43 @@ class StocksController < ApplicationController
     @stock.quantity += params[:quantity].to_i
     @stock.save
 
+    # mock data for stock
+    file_path = Rails.root.join("lib", "assets", "data.json")
+    data = JSON.parse(File.read(file_path))
+    @price = data["Global Quote"]["05. price"]
+
+    # real data fetch for stock
+    # @price = AvaApi.get_price(@stock.code)
+
     current_user.transactions.create!(
       transaction_type: "Buy",
       code: @stock.code,
       quantity: params[:quantity],
       current_price: @price,
-      total: params[:quantity].to_i * @price.to_i
+      total: params[:quantity].to_i * @price.to_f
     )
     redirect_to root_path
   end
 
   def sell
     @stock = current_user.stocks.find(params[:id])
-    @stock.quantity -= params[:quantity].to_i
+    @stock.quantity -= params[:quantity].to_f
     @stock.save
+
+    # mock data for stock
+    file_path = Rails.root.join("lib", "assets", "data.json")
+    data = JSON.parse(File.read(file_path))
+    @price = data["Global Quote"]["05. price"]
+
+    # real data fetch for stock
+    # @price = AvaApi.get_price(@stock.code)
 
     current_user.transactions.create!(
       transaction_type: "Sell",
       code: @stock.code,
       quantity: params[:quantity],
       current_price: @price,
-      total: params[:quantity].to_i * @price.to_i
+      total: params[:quantity].to_i * @price.to_f
     )
     redirect_to root_path
   end
@@ -81,6 +120,6 @@ class StocksController < ApplicationController
   private
 
   def stock_params
-    params.permit(:name, :code, :quantity)
+    params.require(:stock).permit(:name, :code, :quantity)
   end
 end
