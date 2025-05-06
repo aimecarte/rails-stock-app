@@ -6,7 +6,6 @@
 
 <% if current_user.isApproved? || current_user.isAdmin? %>
 
-
   <%= form_with url: buy_stock_path(@stock) do |f| %>
     <%= number_field_tag :quantity, nil, placeholder: "Quantity" %>
     <%= f.submit "Buy" %>
@@ -16,5 +15,7 @@
     <%= f.submit "Sell" %>
   <% end %>
 
+
+  
 <%end %>
 </div>

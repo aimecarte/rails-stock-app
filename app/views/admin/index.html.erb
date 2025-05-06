@@ -12,10 +12,10 @@
       <th scope="col">EMAIL</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
-      <th scope="col">Is Admin</th>
-      <th scope="col">Is Approve</th>
-      <th scope="col">KUNG ANO PA MAN?</th>
-      <th scope="col">EDIT?</th>   
+      <th scope="col">Is Admin?</th>
+      <th scope="col">Is Approved</th>
+      <th scope="col">EDIT?</th>
+      <th scope="col">VIEW PROFILE?</th>   
     </tr>
   </thead>
 
@@ -29,8 +29,8 @@
       <td><%= user.last_name %></td>
       <td><%= user.isAdmin ? "True" : "False" %></td>
       <td><%= user.isApproved ? "True" : "False" %></td>
-      <td class="table-active">@social</td>
       <td> <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-primary' %></td>
+      <td> <%= link_to 'Profile',  admin_user_path(user.id), class: 'btn btn-primary' %></td>
     </tr>
   </tbody>
       <% end %>
@@ -47,10 +47,10 @@
       <th scope="col">EMAIL</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
-      <th scope="col">Is Admin</th>
-      <th scope="col">Is Approve?</th>
-      <th scope="col">KUNG ANO PA MAN?</th>
-      <th scope="col">EDIT?</th>   
+      <th scope="col">Is Admin?</th>
+      <th scope="col">Is Approved?</th>
+      <th scope="col">EDIT?</th>
+      <th scope="col">VIEW?</th>   
     </tr>
   </thead>
 
@@ -64,8 +64,8 @@
       <td><%= user.last_name %></td>
       <td><%= user.isAdmin %></td>
       <td><%= user.isApproved %></td>
-      <td class="table-active"> </td>
       <td><%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-primary' %></td>
+      <td> <%= link_to 'Profile',  admin_user_path(user.id), class: 'btn btn-primary' %></td>
     </tr>
   </tbody>
       <% end %>
