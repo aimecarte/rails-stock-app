@@ -3,11 +3,11 @@
   <p>Symbol: <%=  @symbol %></p>
   <p>Stock Price: <%=  @stock_price %></p>
 <% end %>
-<%= form_with url: "/search", method: :get do |form| %>
-  <%= form.label :query, "Search stock:" %>
-  <%= form.search_field :query %>
+<%= form_with url: "/search", html: { role: "search" } , method: :get do |form| %>
+  <%= form.search_field :query, aria: { label: "Seach" }, placeholder: "Search stock" %>
   <%= form.submit "Search" %>
 <% end %>
+
 <h3>Your stocks</h3>
 <ul>
   <% @stocks.each do |stock| %>
