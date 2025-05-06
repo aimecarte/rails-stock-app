@@ -1,6 +1,8 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
+  
   before_action :authenticate_admin!
   before_action :set_user, only: [:edit, :update]
+
 
   def new
     @user = User.new
@@ -8,7 +10,11 @@ class Admin::UsersController < ApplicationController
 
   def edit; end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])  # This line should be setting @user correctly
+  end
+  
+
 
   def update
     if @user.update(user_params)
