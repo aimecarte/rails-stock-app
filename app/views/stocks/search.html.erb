@@ -1,25 +1,31 @@
+<h3>Your stocks</h3>
+<ul>
+  <% @user_stocks.each do |res| %>
+    <li>
+      <div>
+        <h3>Name: <%= res[:name] %></h3>
+        <h4>Code: <%= res[:code] %></h4>
+      </div>
+      <%= link_to "Trade", stock_path(res) %>
+    </li>
+  <% end %>  
+</ul>
 <h3>Search Results</h3>
 <ul>
-  <% @results.each do |res| %>
+  <% @stocks.each do |res| %>
     <li>
       <div>
         <h3>Name: <%= res[:name] %></h3>
         <h4>Code: <%= res[:symbol] %></h4>
       </div>
-      <%= form_with url: stocks_path, method: :post do |f| %>
-        <div>
-          <%= hidden_field_tag :name, res[:name]  %>
-          <%= hidden_field_tag :code, res[:symbol]  %>
-        </div>
-        <div>
-          <% if current_user.isApproved? || current_user.isAdmin %>
-          
-          <%= number_field_tag :quantity, nil , placeholder: "Quantity" %>
-          <%= f.submit "Buy" %>
-          <%end%>
+      
+      <div>
+        <% if current_user.isApproved? || current_user.isAdmin %>
+        
+        <%= link_to "Buy", new_stock_path(name: res[:name], code: res[:symbol]) %>
+        <%end%>
 
-        </div>
-      <% end %>
+      </div>
     </li>
   <% end %>  
 </ul>

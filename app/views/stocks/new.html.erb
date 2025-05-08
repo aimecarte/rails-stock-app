@@ -1,0 +1,20 @@
+<h1>Confirm Purchase</h1>
+
+<%= form_with model: @stock, url: stocks_path, method: :post do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, readonly: true %>
+  </div>
+
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code, readonly: true %>
+  </div>
+
+  <div>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+
+  <%= f.submit "Confirm Buy" %>
+<% end %>
