@@ -1,15 +1,27 @@
 <h3>Your stocks</h3>
-<ul>
-  <% @user_stocks.each do |res| %>
-    <li>
-      <div>
-        <h3>Name: <%= res[:name] %></h3>
-        <h4>Code: <%= res[:code] %></h4>
-      </div>
-      <%= link_to "Trade", stock_path(res) %>
-    </li>
-  <% end %>  
-</ul>
+
+
+<% valid_stocks = @user_stocks.select { |res| res[:quantity].to_i > 0 } %> 
+<%# validates if trader have stocks. Ignores (Does not display) when 0 or negative %>
+<% if valid_stocks.any? %>
+  <ul>
+    <% valid_stocks.each do |res| %>
+      <li>
+        <div>
+          <h3>Name: <%= res[:name] %></h3>
+          <h4>Code: <%= res[:code] %></h4>
+        </div>
+        <%= link_to "Trade", stock_path(res) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><strong>YOU DON'T HAVE ANY STOCKS!</strong></p>
+<% end %>
+
+
+
+
 <h3>Search Results</h3>
 <ul>
   <% @stocks.each do |res| %>
