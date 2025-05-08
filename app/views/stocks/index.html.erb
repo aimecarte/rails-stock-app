@@ -1,4 +1,9 @@
-<h1>Portfolio <%= @current_user.email %> </h1>
+<nav>
+    <li><strong>WELCOME <%= @current_user.email %> ! </strong></li>
+</nav>
+
+
+<div class="content">
 <% if @symbol %>
   <p>Symbol: <%=  @symbol %></p>
   <p>Stock Price: <%=  @stock_price %></p>
@@ -8,7 +13,8 @@
   <%= form.submit "Search" %>
 <% end %>
 
-<h3>Your stocks</h3>
+<% if current_user.isApproved?%>
+    <h3>Your stocks</h3>
 <ul>
   <% @stocks.each do |stock| %>
     <li>
@@ -20,15 +26,30 @@
     </li>
   <% end %>
 </ul>
+  <%else%>
+    <p> Please wait for the admins approval of your account so you can start buying and selling stocks! </p>
+    <p> For the meantime </p>
+   <%end%>
 
-<%= link_to "View Your Transactions", transactions_path  %>
+<%= link_to "View Your Transactions", transactions_path  %> <br><br>
 
-<%= link_to "Home Page", root_path %> <br><br><br>
 
 <% if current_user.isAdmin?%>
-<%= link_to "Admin Page", admin_index_path, class: "btn btn-outline-warning" %>
-<% end %> <br><br><br>
+<%= link_to "Admin Page", admin_index_path, class: "btn btn-outline-warning" %> <br><br>
+<% end %>
 
 <%= link_to "Sign Out", destroy_user_session_path, 
 data: {turbo_method: :delete, turbo_confirm: "Sure ka ba?"},
-class: "btn btn-danger" %>  <br>
+class: "btn btn-danger" %> 
+
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
