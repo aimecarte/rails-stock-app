@@ -6,13 +6,13 @@ class StocksController < ApplicationController
 
   def show
     # mock data for stock
-    # file_path = Rails.root.join("lib", "assets", "data.json")
-    # data = JSON.parse(File.read(file_path))
+    file_path = Rails.root.join("lib", "assets", "data.json")
+    data = JSON.parse(File.read(file_path))
 
     @stock = current_user.stocks.find(params[:id])
 
     # real data fetch for stock
-    data = AvaApi.fetch_records(@stock.code)
+    # data = AvaApi.fetch_records(@stock.code)
 
     @price = data["Global Quote"]["05. price"]
   end

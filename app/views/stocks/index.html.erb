@@ -1,7 +1,25 @@
 <nav>
     <li><strong>WELCOME <%= @current_user.email %> ! </strong></li>
+
+    <li>
+      <details class="dropdown">
+        <summary>
+          Account
+        </summary>
+        <ul dir="rtl">
+          <li><% if current_user.isAdmin?%>
+              <%= link_to "Admin Page", admin_index_path, style: "color: yellow;" %>
+              <% end %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, 
+                  data: {turbo_method: :delete, turbo_confirm: "Sure ka ba?"},
+                  style: "color: red;" %></li>
+        </ul>
+      </details>
+    </li>
 </nav>
 
+
+</nav>
 
 <div class="content">
 <% if @symbol %>
@@ -13,40 +31,44 @@
   <%= form.submit "Search" %>
 <% end %>
 
-<% if current_user.isApproved?%>
-    <h3>Your stocks</h3>
-<ul>
+<% if current_user.isApproved? || current_user.isAdmin?%>
+<h3>Your stocks</h3>
+<table class="table table-bordered border-primary">
+  <thead>
+  <tr>
+    <th scope="col">STOCK CODE</th>
+    <th scope="col">QUANTITY</th>
+    <th scope="col">Trade?</th>
+    <th scope="col">Transactions</th>
+  </tr>
+  </thead>
+
   <% @stocks.each do |stock| %>
-    <li>
-      <div><%= stock.code %></div>
-      <div><%= stock.quantity %></div>
-      <div>
-        <%= link_to "Trade", stock_path(stock) %>
-      </div>
-    </li>
+      <tr>
+      <th scope="row"> <%= stock.code %> </th>
+      <td><%= stock.quantity %></td>
+      <td> <%= link_to "Trade", stock_path(stock) %></td>
+      <td> <%= link_to "View Here", transactions_path %> </td>
   <% end %>
-</ul>
-  <%else%>
-    <p> Please wait for the admins approval of your account so you can start buying and selling stocks! </p>
-    <p> For the meantime </p>
-   <%end%>
-
-<%= link_to "View Your Transactions", transactions_path  %> <br><br>
+</table>
 
 
-<% if current_user.isAdmin?%>
-<%= link_to "Admin Page", admin_index_path, class: "btn btn-outline-warning" %> <br><br>
-<% end %>
-
-<%= link_to "Sign Out", destroy_user_session_path, 
-data: {turbo_method: :delete, turbo_confirm: "Sure ka ba?"},
-class: "btn btn-danger" %> 
-
-
-</div>
-
+ 
+    <%else%>
+      <p> Please wait for the admins approval of your account so you can start buying and selling stocks! </p>
+      <p> For the meantime, you just can SEARCH for STOCKS! </p>
+    <%end%>
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 

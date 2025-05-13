@@ -10,10 +10,20 @@
     <%= number_field_tag :quantity, nil, placeholder: "Quantity" %>
     <%= f.submit "Buy" %>
   <% end %>
+
+
+<%# Disable the sell button if the quantity is 0%>
+
+<% if @stock.quantity > 0 %>
   <%= form_with url: sell_stock_path(@stock) do |f| %>
     <%= number_field_tag :quantity, nil, placeholder: "Quantity" %>
     <%= f.submit "Sell" %>
   <% end %>
+<% else %>
+  <p><em>Out of stock – cannot sell.</em></p>
+<% end %>
 
 <%end %>
 </div>
+
+<%= link_to "Home Page", root_path %> <br> <br>

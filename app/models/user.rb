@@ -16,6 +16,19 @@ class User < ApplicationRecord
   attribute :isApproved, :boolean, default: false
 
 
+  def can_search_stocks?
+    !isApproved
+  end
+  
+  def can_trade_stocks?
+    isApproved
+  end
+
+
+  def admin?
+    admin
+  end
+
   private
 
   def send_welcome_email
