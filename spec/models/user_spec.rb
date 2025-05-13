@@ -18,36 +18,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-
-
-#  describe 'Admin Page Access', type: :system do 
-#     def login_as(user)
-#       visit '/users/sign_in'
-#       fill_in 'Email', with: user.email
-#       fill_in 'Password', with: 'password'
-#       click_button 'Log in'
-#     end
- 
-#     it 'allows access to the admin page for admin users' do
-#       login_as(admin_user)
-#       visit '/admin/index'
-#       expect(page).to have_content('Admin#index')
-#     end
-    
-    # context 'when logged in as a regular user' do
-    #   it 'denies access to the admin page' do
-    #     sign_in regular_user
-    #     visit '/admin/index'
-    #     expect(page).to have_content('Access denied') # or whatever your app shows
-    #     expect(current_path).to eq(root_path)
-    #   end
-    # end
-    
-    # context 'when not logged in' do
-    #   it 'redirects to the login page' do
-    #     visit '/admin/index'
-    #     expect(current_path).to eq(new_user_session_path)
-    #   end
-    # end
-  end
+end

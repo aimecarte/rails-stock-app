@@ -1,8 +1,6 @@
-class Admin::UsersController < Admin::BaseController
-  
+class Admin::UsersController < Admin::BaseController 
   before_action :authenticate_admin!
-  before_action :set_user, only: [:edit, :update]
-
+  before_action :set_user, only: [:edit, :update, :show]
 
   def new
     @user = User.new
@@ -10,12 +8,8 @@ class Admin::UsersController < Admin::BaseController
 
   def edit; end
 
-  def show
-    @user = User.find(params[:id])  # This line should be setting @user correctly
-  end
+  def show;  end
   
-
-
   def update
     if @user.update(user_params)
       if @user.isApproved?
@@ -29,7 +23,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
  
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -52,7 +45,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name, :isAdmin, :isApproved)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :isAdmin, :isApproved)
   end
 
 end
