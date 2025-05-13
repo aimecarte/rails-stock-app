@@ -7,9 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const toggleButton = document.getElementById("toggleButton");
   const userTable = document.getElementById("userTable");
   const tableDiv = document.getElementById("traderTable");
+  const allTraderHeader = document.getElementById("allTrader");
+  const allUserHeader = document.getElementById("allUser");
 
   // Set the table to be hidden by default
   traderTable.style.display = "none"; // Ensure it's hidden when the page loads
+  allTraderHeader.style.display = "none"; // Ensure trader header is hidden when the page loads
 
   // Set the initial button text
   toggleButton.textContent = "Show Trader User";
@@ -18,13 +21,27 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleButton.addEventListener("click", function () {
     // Check which table is currently visible and toggle visibility
     if (userTable.style.display === "none") {
-      userTable.style.display = "block"; // Show user table
-      traderTable.style.display = "none"; // Hide trader table
-      toggleButton.textContent = "Show Trader User"; // Update button text
+      // Show user table and header
+      userTable.style.display = "block";
+      allUserHeader.style.display = "block";
+
+      // Hide trader table and header
+      traderTable.style.display = "none";
+      allTraderHeader.style.display = "none";
+
+      // Update button text
+      toggleButton.textContent = "Show Trader User";
     } else {
-      userTable.style.display = "none"; // Hide user table
-      traderTable.style.display = "block"; // Show trader table
-      toggleButton.textContent = "Show All User"; // Update button text
+      // Show trader table and header
+      traderTable.style.display = "block";
+      allTraderHeader.style.display = "block";
+
+      // Hide user table and header
+      userTable.style.display = "none";
+      allUserHeader.style.display = "none";
+
+      // Update button text
+      toggleButton.textContent = "Show All User";
     }
   });
 });

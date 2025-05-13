@@ -1,5 +1,4 @@
-<h3>Your stocks</h3>
-
+<h3 style="text-align: center;">Your stocks</h3>
 
 <% valid_stocks = @user_stocks.select { |res| res[:quantity].to_i > 0 } %> 
 <%# validates if trader have stocks. Ignores (Does not display) when 0 or negative %>
@@ -31,13 +30,12 @@
         <h4>Code: <%= res[:symbol] %></h4>
       </div>
       
-      <div>
-        <% if current_user.isApproved? || current_user.isAdmin %>
-        
-        <%= link_to "Buy", new_stock_path(name: res[:name], code: res[:symbol]) %>
-        <%end%>
+  <div>
+    <% if current_user.isApproved? || current_user.isAdmin %>
+      <%= link_to "Buy", new_stock_path(name: res[:name], code: res[:symbol]) %>
+      <%end%>
+  </div>
 
-      </div>
     </li>
   <% end %>  
 </ul>
