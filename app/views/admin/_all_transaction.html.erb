@@ -1,0 +1,33 @@
+<h1><center>All Transactions List</center></h1>
+
+<table class="table table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col">USER ID</th>
+      <th scope="col">Transaction ID</th>
+      <th scope="col">Type</th>
+      <th scope="col">Code</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Current Price</th>
+      <th scope="col">Total</th>
+     
+    </tr>
+  </thead>
+
+
+   <% @transaction.each do |transaction| %>
+
+ </tr>
+    <tr>
+      <th scope="row">><%= transaction.user_id %></td>
+      <th> <%= transaction.id %> </th>
+      <td><%= transaction.transaction_type %></td>
+      <td><%= transaction.code %></td>
+      <td><%= transaction.quantity %></td>
+      <td><%= transaction.current_price %></td>
+      <td><%= transaction.total %></td>
+    
+    </tr>
+  </tbody>
+      <% end %>
+</table>
